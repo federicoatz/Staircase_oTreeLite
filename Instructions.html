@@ -1,0 +1,21 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Instructions{{ endblock }}
+
+{{ block content }}
+
+<div class="wrapper instructions">
+    <p>
+    Welcome to the second part of the experiment
+</p>
+ <p>
+{% blocktrans trimmed %}
+Please imagine the following situation. You can choose between a sure payment of a particular amount of money, or a draw, where you would have an equal chance of getting amount x or getting nothing. We will present to you five different situations. What would you prefer: a draw with a 50% chance of receiving amount x, and the same 50% chance of receiving nothing, or the amount of y as a sure payment?    </p>
+    <p>
+After completing all 5 choices, one of the choices will be randomly picked to determine your payoff. If you choose the lottery, a random draw will determine whether the high or low outcome will constitute your payoff. Otherwise, the sure payment will include your payoff.
+        {% endblocktrans %}
+ </p>
+</div>
+
+{{ next_button }}
+
+{{ endblock }}

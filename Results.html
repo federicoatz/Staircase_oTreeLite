@@ -1,0 +1,159 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Results{{ endblock }}
+
+{{ block content }}
+
+ <div class="wrapper">
+
+        <div class="card info">
+            {% blocktrans trimmed %}
+                The following decision was randomly chosen for your payment:
+            {% endblocktrans %}
+        </div>
+        <br/>
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Table - Decision -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <div class="card">
+            <div class="card-header">
+                {% blocktrans trimmed %}
+                    Your choice:
+                {% endblocktrans %}
+            </div>
+            <table class="table">
+                <tr>
+                    <th>{% trans "Option A:" %}</th>
+                    <td>                            {% blocktrans trimmed %}
+                                a {{ p_hi }} chance of winning {{ hi }} and <br/>
+                                a {{ p_lo }} chance of winning {{ lo }}
+                            {% endblocktrans %}
+                    </td>
+                    <td>
+                        {% if C.BUTTONS == True %}
+                            {% if option_to_pay == 'A' %}
+                                <button class="btn btn-success choice" disabled>
+                                    {% trans "Option A" %}
+                                </button>
+                            {% else %}
+                                <button class="btn btn-primary choice" disabled>
+                                    {% trans "Option A" %}
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            {% if option_to_pay == 'A' %}
+                                <input type="radio" style="pointer-events: none;" checked="checked">
+                            {% else %}
+                                <input type="radio" style="pointer-events: none;">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {% trans "Option B:" %}
+                    </th>
+                    <td>
+                        {% with sure_payoff=sure_payoff %}
+                            {% blocktrans trimmed %}
+                                an amount of {{ sure_payoff }} as a sure payment
+                            {% endblocktrans %}
+                        {% endwith %}
+                    </td>
+                    <td>
+                        {% if C.BUTTONS == True %}
+                            {% if option_to_pay == 'B' %}
+                                <button class="btn btn-success choice" disabled>
+                                    {% trans "Option B" %}
+                                </button>
+                            {% else %}
+                                <button class="btn btn-primary choice" disabled>
+                                    {% trans "Option B" %}
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            {% if option_to_pay == 'B' %}
+                                <input type="radio" style="pointer-events: none;" checked="checked">
+                            {% else %}
+                                <input type="radio" style="pointer-events: none;">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% if C.INDIFFERENCE == True %}
+                <tr>
+                    <th>
+                    </th>
+                    <td>
+                        {% with sure_payoff=sure_payoff %}
+                            {% blocktrans trimmed %}
+                                I'm indifferent between Option A and Option B
+                            {% endblocktrans %}
+                        {% endwith %}
+                    </td>
+                    <td>
+                        {% if C.BUTTONS == True %}
+                            {% if option_to_pay == 'I' %}
+                                <button class="btn btn-success choice" disabled>
+                                    {% trans "Indifferent" %}
+                                </button>
+                            {% else %}
+                                <button class="btn btn-primary choice" disabled>
+                                    {% trans "Indifferent" %}
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            {% if option_to_pay == 'I' %}
+                                <input type="radio" style="pointer-events: none;" checked="checked">
+                            {% else %}
+                                <input type="radio" style="pointer-events: none;">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+        <br/>
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Payoff Information -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <div class="card info">
+
+            {% if option_to_pay == 'I' %}
+                {% blocktrans trimmed with payoff_relevant=payoff_relevant %}
+                    As indicated above, you stated to be indifferent between "Option A" and "Option B" in this choice.
+                    "Option {{ payoff_relevant }}" was randomly chosen to determine your payment.
+                {% endblocktrans %}
+                <br/>
+            {% else %}
+                {% blocktrans trimmed with option_to_pay=option_to_pay %}
+                    As indicated above, you decided for "Option {{ option_to_pay }}" in this choice.
+                {% endblocktrans %}
+                <br/>
+            {% endif %}
+
+            {% if payoff_relevant == "A" %}
+                <br/>
+                {% blocktrans trimmed %}
+                    For "Option A", one of the two possible outcomes has been
+                    randomly realized based on the corresponding probabilities.
+                {% endblocktrans %}
+            {% endif %}
+
+            <br/>
+            {% blocktrans trimmed with payoff=payoff %}
+                Your payoff in this task equals {{ payoff }}.
+            <br>
+            <p>
+    This value is expressed in ECU and its conversion rate in is 0.03. Hence, 100 ECU means 3€.
+     </p> 
+            {% endblocktrans %}
+        </div>
+    </div>
+
+
+{{next_button}}
+
+{{ endblock }}
