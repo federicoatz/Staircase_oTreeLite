@@ -1,0 +1,60 @@
+
+/* ****************************************************************************************************************** */
+/* *** Decision/Results Table *** */
+/* ****************************************************************************************************************** */
+
+.card-header {
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table>tbody>tr>th,
+.table>tbody>tr>td {
+    vertical-align: middle;
+    padding: 15px;
+    height: 65px;
+    min-width: 100px;
+}
+
+.info {
+    padding: 15px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+input[type="radio"]{
+    margin: 7.5px;
+}
+
+.btn-success[disabled], .btn-primary[disabled] {
+    opacity: 1;
+}
+
+.choice {
+    min-width: 100px;
+}
+
+
+/* ****************************************************************************************************************** */
+/* *** Progress Bar *** */
+/* ****************************************************************************************************************** */
+
+.progress {
+    height: 15px;
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    background-color: rgba(43, 102, 154, 0.20);
+    background-image: linear-gradient(to bottom, rgba(43, 102, 154, 0.1) 0, rgba(43, 102, 154, 0.6) 100%);
+    background-repeat: repeat-x;
+}
+
+label {
+    font-weight: normal;
+    margin-bottom: 4pt;
+}
+
