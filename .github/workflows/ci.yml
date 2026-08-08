@@ -13,8 +13,10 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install requests
       - name: Compile check (catches syntax errors)
         run: python -m compileall -q .
-      - name: oTree config check
-        run: otree check
+      - name: oTree bot smoke test
+        run: otree test Global 2
