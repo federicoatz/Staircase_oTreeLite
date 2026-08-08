@@ -1,0 +1,199 @@
+/* ==================================================================== */
+/* Staircase risk task - theme                                          */
+/* ==================================================================== */
+
+:root {
+    --staircase-primary: #2b5f8a;
+    --staircase-primary-dark: #1e4463;
+    --staircase-accent: #1f9d6b;
+    --staircase-bg: #f4f6f9;
+    --staircase-card-bg: #ffffff;
+    --staircase-border: #e1e6ec;
+    --staircase-text: #1f2933;
+    --staircase-text-muted: #5c6b7a;
+    --staircase-radius: 14px;
+    --staircase-shadow: 0 2px 10px rgba(20, 30, 45, 0.08);
+    --staircase-shadow-hover: 0 6px 20px rgba(20, 30, 45, 0.12);
+}
+
+body {
+    background: var(--staircase-bg);
+}
+
+.staircase {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--staircase-text);
+}
+
+.staircase-instructions p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Progress bar                                                     */
+/* ---------------------------------------------------------------- */
+
+.staircase-progress {
+    margin-bottom: 1.75rem;
+}
+
+.staircase-progress-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--staircase-text-muted);
+    margin-bottom: 6px;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 999px;
+    background-color: var(--staircase-border);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-image: linear-gradient(90deg, var(--staircase-primary) 0%, var(--staircase-accent) 100%);
+    transition: width 0.3s ease;
+}
+
+/* ---------------------------------------------------------------- */
+/* Question + option cards                                          */
+/* ---------------------------------------------------------------- */
+
+.staircase-question {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--staircase-text);
+}
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.option-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--staircase-card-bg);
+    border: 1px solid var(--staircase-border);
+    border-radius: var(--staircase-radius);
+    box-shadow: var(--staircase-shadow);
+    padding: 1.25rem;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.option-card:hover {
+    box-shadow: var(--staircase-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.option-card-indifferent {
+    grid-column: 1 / -1;
+}
+
+.option-card-label {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--staircase-primary-dark);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.option-card-body {
+    color: var(--staircase-text);
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 1.1rem;
+}
+
+.option-card-action {
+    display: flex;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background-color: var(--staircase-primary);
+    border: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.option-btn:hover {
+    background-color: var(--staircase-primary-dark);
+}
+
+.option-btn:active {
+    transform: scale(0.98);
+}
+
+input[type="radio"] {
+    width: 1.15em;
+    height: 1.15em;
+    margin: 4px 0;
+}
+
+/* ---------------------------------------------------------------- */
+/* Results page                                                     */
+/* ---------------------------------------------------------------- */
+
+.option-card-selected {
+    border-color: var(--staircase-accent);
+    box-shadow: 0 0 0 2px rgba(31, 157, 107, 0.25), var(--staircase-shadow);
+}
+
+.option-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: var(--staircase-accent);
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+}
+
+.info-panel {
+    background: var(--staircase-card-bg);
+    border: 1px solid var(--staircase-border);
+    border-left: 4px solid var(--staircase-primary);
+    border-radius: var(--staircase-radius);
+    box-shadow: var(--staircase-shadow);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.payoff-line {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--staircase-primary-dark);
+}
+
+/* ---------------------------------------------------------------- */
+/* Responsive                                                       */
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+    .staircase-question {
+        font-size: 1.15rem;
+    }
+
+    .option-grid {
+        grid-template-columns: 1fr;
+    }
+}

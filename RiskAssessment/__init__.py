@@ -1,8 +1,13 @@
+import random
 
 from otree.api import *
+
 c = cu
 
-doc = 'Staircase risk task: Falk, A., et al. (2018).'
+doc = """
+Staircase risk task: Falk, A., et al. (2018).
+Based on https://github.com/felixholzmeister/icl, adapted for oTree v5+.
+"""
 class C(BaseConstants):
     NAME_IN_URL = 'RiskAssessment'
     PLAYERS_PER_GROUP = None
@@ -61,8 +66,7 @@ def set_payoffs(player: Player):
     session = player.session
     subsession = player.subsession
     participant = player.participant
-    import random
-    
+
     current_round = subsession.round_number
     current_choice = player.in_round(current_round).choice
     

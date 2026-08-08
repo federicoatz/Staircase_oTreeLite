@@ -1,0 +1,94 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Your Decision{{ endblock }}
+
+{{ block content }}
+
+<div class="staircase">
+
+    {{ if C.PROGRESS_BAR == True }}
+    <div class="staircase-progress">
+        <div class="staircase-progress-label">
+            {{ blocktrans trimmed with page=page total=total }}
+                Step {{ page }} of {{ total }}
+            {{ endblocktrans }}
+        </div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width:{{ progress|json }}%;">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+    </div>
+    {{ endif }}
+
+    <h2 class="staircase-question">{{ trans "What do you prefer?" }}</h2>
+
+    <div class="option-grid">
+
+        <div class="option-card">
+            <div class="option-card-label">{{ trans "Option A" }}</div>
+            <div class="option-card-body">
+                {{ blocktrans trimmed }}
+                    a {{ p_hi }} chance of winning {{ hi }} and
+                    a {{ p_lo }} chance of winning {{ lo }}
+                {{ endblocktrans }}
+            </div>
+            <div class="option-card-action">
+                {{ if C.BUTTONS == True }}
+                    <button class="btn btn-primary option-btn" name="choice" value="A" required>
+                        {{ trans "Option A" }}
+                    </button>
+                {{ else }}
+                    <input type="radio" name="choice" value="A" required>
+                {{ endif }}
+            </div>
+        </div>
+
+        <div class="option-card">
+            <div class="option-card-label">{{ trans "Option B" }}</div>
+            <div class="option-card-body">
+                {{ with sure_payoff=sure_payoff }}
+                    {{ blocktrans trimmed }}
+                        an amount of {{ sure_payoff }}
+                        as a sure payment
+                    {{ endblocktrans }}
+                {{ endwith }}
+            </div>
+            <div class="option-card-action">
+                {{ if C.BUTTONS == True }}
+                    <button class="btn btn-primary option-btn" name="choice" value="B" required>
+                        {{ trans "Option B" }}
+                    </button>
+                {{ else }}
+                    <input type="radio" name="choice" value="B" required>
+                {{ endif }}
+            </div>
+        </div>
+
+        {{ if C.INDIFFERENCE == True }}
+        <div class="option-card option-card-indifferent">
+            <div class="option-card-body">
+                {{ blocktrans trimmed }}
+                    I'm indifferent between Option A and Option B
+                {{ endblocktrans }}
+            </div>
+            <div class="option-card-action">
+                {{ if C.BUTTONS == True }}
+                    <button class="btn btn-primary option-btn" name="choice" value="I" required>
+                        {{ trans "Indifferent" }}
+                    </button>
+                {{ else }}
+                    <input type="radio" name="choice" value="I" required>
+                {{ endif }}
+            </div>
+        </div>
+        {{ endif }}
+
+    </div>
+
+</div>
+
+{{ if C.BUTTONS == False }}
+{{ next_button }}
+{{ endif }}
+
+{{ endblock }}

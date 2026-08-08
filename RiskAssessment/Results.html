@@ -1,0 +1,100 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Results{{ endblock }}
+
+{{ block content }}
+
+<div class="staircase">
+
+    <div class="info-panel">
+        {{ blocktrans trimmed }}
+            The following decision was randomly chosen for your payment:
+        {{ endblocktrans }}
+    </div>
+
+    <h2 class="staircase-question">{{ trans "Your choice" }}</h2>
+
+    <div class="option-grid">
+
+        <div class="option-card {{ if option_to_pay == 'A' }}option-card-selected{{ endif }}">
+            <div class="option-card-label">
+                {{ trans "Option A" }}
+                {{ if option_to_pay == 'A' }}<span class="option-badge">{{ trans "Selected" }}</span>{{ endif }}
+            </div>
+            <div class="option-card-body">
+                {{ blocktrans trimmed }}
+                    a {{ p_hi }} chance of winning {{ hi }} and
+                    a {{ p_lo }} chance of winning {{ lo }}
+                {{ endblocktrans }}
+            </div>
+        </div>
+
+        <div class="option-card {{ if option_to_pay == 'B' }}option-card-selected{{ endif }}">
+            <div class="option-card-label">
+                {{ trans "Option B" }}
+                {{ if option_to_pay == 'B' }}<span class="option-badge">{{ trans "Selected" }}</span>{{ endif }}
+            </div>
+            <div class="option-card-body">
+                {{ with sure_payoff=sure_payoff }}
+                    {{ blocktrans trimmed }}
+                        an amount of {{ sure_payoff }} as a sure payment
+                    {{ endblocktrans }}
+                {{ endwith }}
+            </div>
+        </div>
+
+        {{ if C.INDIFFERENCE == True }}
+        <div class="option-card {{ if option_to_pay == 'I' }}option-card-selected{{ endif }}">
+            <div class="option-card-label">
+                {{ trans "Indifferent" }}
+                {{ if option_to_pay == 'I' }}<span class="option-badge">{{ trans "Selected" }}</span>{{ endif }}
+            </div>
+            <div class="option-card-body">
+                {{ with sure_payoff=sure_payoff }}
+                    {{ blocktrans trimmed }}
+                        I'm indifferent between Option A and Option B
+                    {{ endblocktrans }}
+                {{ endwith }}
+            </div>
+        </div>
+        {{ endif }}
+
+    </div>
+
+    <div class="info-panel">
+
+        {{ if option_to_pay == 'I' }}
+            {{ blocktrans trimmed with payoff_relevant=payoff_relevant }}
+                As indicated above, you stated to be indifferent between "Option A" and "Option B" in this choice.
+                "Option {{ payoff_relevant }}" was randomly chosen to determine your payment.
+            {{ endblocktrans }}
+        {{ else }}
+            {{ blocktrans trimmed with option_to_pay=option_to_pay }}
+                As indicated above, you decided for "Option {{ option_to_pay }}" in this choice.
+            {{ endblocktrans }}
+        {{ endif }}
+
+        {{ if payoff_relevant == "A" }}
+            <p>
+                {{ blocktrans trimmed }}
+                    For "Option A", one of the two possible outcomes has been
+                    randomly realized based on the corresponding probabilities.
+                {{ endblocktrans }}
+            </p>
+        {{ endif }}
+
+        <p class="payoff-line">
+            {{ blocktrans trimmed with payoff=payoff }}
+                Your payoff in this task equals {{ payoff }}.
+            {{ endblocktrans }}
+        </p>
+        <p>
+            {{ blocktrans trimmed }}
+                This value is expressed in ECU and its conversion rate is 0.03. Hence, 100 ECU means 3€.
+            {{ endblocktrans }}
+        </p>
+    </div>
+</div>
+
+{{ next_button }}
+
+{{ endblock }}
